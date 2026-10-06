@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luis Miguel Russo · Backend Developer</title>
+<meta name="description" content="Portafolio de Luis Miguel Russo Tinjaca, desarrollador backend: Node.js, TypeScript, NestJS, AWS y desarrollo asistido por IA.">
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --text: #17202b;
+    --muted: #5b6776;
+    --line: #dfe4ea;
+    --accent: #003366;
+    --accent-soft: #e6edf5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1419;
+      --surface: #171e26;
+      --text: #e7ecf1;
+      --muted: #9aa7b5;
+      --line: #2a3440;
+      --accent: #7fb2e5;
+      --accent-soft: #1c2a3a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1419;
+    --surface: #171e26;
+    --text: #e7ecf1;
+    --muted: #9aa7b5;
+    --line: #2a3440;
+    --accent: #7fb2e5;
+    --accent-soft: #1c2a3a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+  /* idioma: se muestra solo el activo */
+  html[lang="es"] .en, html[lang="en"] .es { display: none; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding-top: 10px; padding-bottom: 10px; flex-wrap: wrap;
+  }
+  .brand { font-weight: 700; color: var(--accent); text-decoration: none; }
+  nav { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
+  nav a:hover { color: var(--accent); }
+  button.toggle {
+    font: inherit; font-size: 13px; cursor: pointer;
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px;
+  }
+  button.toggle:hover { border-color: var(--accent); }
+
+  .hero { padding: 56px 0 40px; }
+  .hero h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.15; margin: 0 0 8px; }
+  .hero .role { color: var(--accent); font-weight: 600; margin: 0 0 18px; }
+  .hero p.lead { max-width: 64ch; margin: 0 0 22px; color: var(--muted); }
+  .links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: 14px;
+    padding: 9px 16px; border-radius: 6px; border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: var(--bg); }
+
+  section { padding: 34px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 22px; margin: 0 0 18px; color: var(--accent); }
+  h3 { font-size: 17px; margin: 0; }
+
+  .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 18px;
+  }
+  .card p { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+
+  .job { margin-bottom: 26px; }
+  .job:last-child { margin-bottom: 0; }
+  .job-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .job .dates { color: var(--muted); font-size: 14px; white-space: nowrap; }
+  .job .title { color: var(--muted); font-style: italic; margin: 2px 0 8px; }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin-bottom: 5px; }
+
+  .skills { display: grid; gap: 14px; }
+  .skills .group { display: grid; grid-template-columns: 190px 1fr; gap: 10px; align-items: start; }
+  .skills .label { font-weight: 600; font-size: 15px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: var(--accent-soft); color: var(--text);
+    border-radius: 4px; padding: 3px 9px; font-size: 13.5px;
+  }
+  @media (max-width: 600px) {
+    .skills .group { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  .two { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .plain { list-style: none; padding: 0; }
+  .plain li { padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .plain li:last-child { border-bottom: 0; }
+  .plain small { color: var(--muted); display: block; }
+
+  footer { border-top: 1px solid var(--line); padding: 26px 0 40px; color: var(--muted); font-size: 14px; }
+  footer a, section a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Luis Miguel Russo</a>
+    <nav>
+      <a href="#trabajo"><span class="es">Qué hago</span><span class="en">What I do</span></a>
+      <a href="#experiencia"><span class="es">Experiencia</span><span class="en">Experience</span></a>
+      <a href="#habilidades"><span class="es">Habilidades</span><span class="en">Skills</span></a>
+      <a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a>
+      <button class="toggle" id="lang" type="button" aria-label="Cambiar idioma / Switch language">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero" id="inicio">
+    <h1>Luis Miguel Russo Tinjaca</h1>
+    <p class="role">
+      <span class="es">Desarrollador Backend · Cloud y DevOps · Desarrollo asistido por IA</span>
+      <span class="en">Backend Developer · Cloud &amp; DevOps · AI-Assisted Development</span>
+    </p>
+    <p class="lead es">Construyo integraciones, servicios en la nube y automatizaciones con Node.js, TypeScript y AWS. Trabajo con arquitecturas orientadas a eventos, infraestructura como código y agentes de IA integrados al flujo de desarrollo. Certificado como AWS Developer Associate.</p>
+    <p class="lead en">I build integrations, cloud services and automations with Node.js, TypeScript and AWS. I work with event-driven architectures, infrastructure as code and AI agents integrated into the development workflow. AWS Certified Developer – Associate.</p>
+    <div class="links">
+      <a class="btn primary" href="mailto:luismiguelrussot@hotmail.com"><span class="es">Escríbeme</span><span class="en">Email me</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/luis-miguel-russo-t-09294385" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+
+  <section id="trabajo">
+    <h2><span class="es">Qué hago</span><span class="en">What I do</span></h2>
+    <div class="grid">
+      <div class="card">
+        <h3><span class="es">Backend e integraciones</span><span class="en">Backend &amp; integrations</span></h3>
+        <p class="es">Servicios en Node.js, TypeScript y NestJS que conectan plataformas CRM, servicios cloud y sistemas externos: procesamiento de archivos, validaciones y automatización de flujos.</p>
+        <p class="en">Node.js, TypeScript and NestJS services connecting CRM platforms, cloud services and external systems: file processing, validation and workflow automation.</p>
+      </div>
+      <div class="card">
+        <h3><span class="es">Arquitectura en AWS</span><span class="en">AWS architecture</span></h3>
+        <p class="es">Arquitecturas serverless orientadas a eventos con procesamiento asíncrono, definidas como código con AWS CDK y observadas con CloudWatch.</p>
+        <p class="en">Serverless, event-driven architectures with asynchronous processing, defined as code with AWS CDK and observed through CloudWatch.</p>
+      </div>
+      <div class="card">
+        <h3><span class="es">Infraestructura y despliegue</span><span class="en">Infrastructure &amp; deployment</span></h3>
+        <p class="es">Administración, configuración y monitoreo de la infraestructura de portales web, despliegues entre ambientes y entornos consistentes con Docker.</p>
+        <p class="en">Administration, configuration and monitoring of web portal infrastructure, deployments across environments, and consistent environments with Docker.</p>
+      </div>
+      <div class="card">
+        <h3><span class="es">Seguridad de servicios</span><span class="en">Service security</span></h3>
+        <p class="es">Autenticación, manejo de sesiones, cifrado de datos, gestión de credenciales y controles de seguridad sobre servicios de consulta pública.</p>
+        <p class="en">Authentication, session management, data encryption, credential management and security controls for public-facing services.</p>
+      </div>
+      <div class="card">
+        <h3><span class="es">Datos</span><span class="en">Data</span></h3>
+        <p class="es">Diseño de esquemas y optimización de consultas en bases SQL, y modelado en DynamoDB y MongoDB.</p>
+        <p class="en">Schema design and query optimization on SQL databases, and data modeling on DynamoDB and MongoDB.</p>
+      </div>
+      <div class="card">
+        <h3><span class="es">IA en el flujo de desarrollo</span><span class="en">AI in the development workflow</span></h3>
+        <p class="es">Spec-Driven Development con agentes de IA: especificación y plan antes del código, implementación asistida y revisión contra la especificación, con runbooks y contexto versionados.</p>
+        <p class="en">Spec-Driven Development with AI agents: spec and plan before code, assisted implementation and review against the spec, backed by versioned runbooks and context.</p>
+      </div>
+    </div>
+    <p class="es" style="color:var(--muted);font-size:14px;margin:16px 0 0">El código de mis proyectos profesionales es privado y está cubierto por acuerdos de confidencialidad, por eso aquí describo el trabajo en lugar de enlazar repositorios.</p>
+    <p class="en" style="color:var(--muted);font-size:14px;margin:16px 0 0">The code from my professional projects is private and covered by confidentiality agreements, so this page describes the work instead of linking repositories.</p>
+  </section>
+
+  <section id="experiencia">
+    <h2><span class="es">Experiencia</span><span class="en">Experience</span></h2>
+
+    <div class="job">
+      <div class="job-head">
+        <h3>EzProtect / Adaptus</h3>
+        <span class="dates"><span class="es">Feb 2024 – Actualidad</span><span class="en">Feb 2024 – Present</span></span>
+      </div>
+      <p class="title">Backend Developer</p>
+      <ul class="es">
+        <li>Integraciones backend entre plataformas CRM, servicios cloud y sistemas externos.</li>
+        <li>Servicios en Node.js y TypeScript para procesamiento de archivos, validaciones y automatización de flujos.</li>
+        <li>Arquitecturas orientadas a eventos con procesamiento asíncrono sobre servicios serverless de AWS.</li>
+        <li>Infraestructura y flujos de despliegue como código con AWS CDK; logging y monitoreo con CloudWatch.</li>
+        <li>Infraestructura y despliegue de portales web con backends en NestJS y Django.</li>
+        <li>Autenticación, sesiones, cifrado de datos y automatización del aprovisionamiento de credenciales.</li>
+        <li>Agentes de IA y Spec-Driven Development integrados al flujo de desarrollo.</li>
+      </ul>
+      <ul class="en">
+        <li>Backend integrations between CRM platforms, cloud services and external systems.</li>
+        <li>Node.js and TypeScript services for file processing, validation and workflow automation.</li>
+        <li>Event-driven architectures with asynchronous processing on AWS serverless services.</li>
+        <li>Infrastructure and deployment workflows as code with AWS CDK; logging and monitoring with CloudWatch.</li>
+        <li>Infrastructure and deployment of web portals with NestJS and Django backends.</li>
+        <li>Authentication, sessions, data encryption and automated provisioning of access credentials.</li>
+        <li>AI agents and Spec-Driven Development integrated into the development workflow.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3>Hubtek</h3>
+        <span class="dates">Oct 2022 – Feb 2024</span>
+      </div>
+      <p class="title">Development Technical Account Rep · Development Technical Analyst</p>
+      <ul class="es">
+        <li>Mantenimiento y optimización de flujos de automatización (Automation 360) y procesos backend operacionales.</li>
+        <li>Configuración, prueba y despliegue de actualizaciones y correcciones en producción.</li>
+        <li>Análisis de datos transaccionales para identificar mejoras en las automatizaciones.</li>
+      </ul>
+      <ul class="en">
+        <li>Maintained and optimized automation workflows (Automation 360) and operational backend processes.</li>
+        <li>Configured, tested and deployed updates and fixes to production.</li>
+        <li>Analyzed transactional data to identify improvements to the automations.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3>Sofka Technologies</h3>
+        <span class="dates"><span class="es">Mar 2022 – Ago 2022</span><span class="en">Mar 2022 – Aug 2022</span></span>
+      </div>
+      <p class="title">Junior Developer</p>
+      <ul class="es"><li>Desarrollo y prueba de funcionalidades web y componentes reutilizables en equipos ágiles.</li></ul>
+      <ul class="en"><li>Developed and tested web features and reusable components in agile teams.</li></ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3>TCA</h3>
+        <span class="dates">Jul 2021 – Feb 2022</span>
+      </div>
+      <p class="title"><span class="es">Programador Aprendiz</span><span class="en">Apprentice Programmer</span></p>
+      <ul class="es"><li>Desarrollo de funcionalidades, pruebas de lógica de negocio y apoyo en despliegues.</li></ul>
+      <ul class="en"><li>Feature development, business logic testing and deployment support.</li></ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <h3>Thomas Processing &amp; Systems</h3>
+        <span class="dates"><span class="es">Feb 2020 – Dic 2020</span><span class="en">Feb 2020 – Dec 2020</span></span>
+      </div>
+      <p class="title"><span class="es">Analista de Servicio Técnico</span><span class="en">Technical Service Analyst</span></p>
+      <ul class="es"><li>Soporte a plataformas tecnológicas, monitoreo de aplicaciones y resolución de incidentes.</li></ul>
+      <ul class="en"><li>Technology platform support, application monitoring and incident resolution.</li></ul>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <h2><span class="es">Habilidades técnicas</span><span class="en">Technical skills</span></h2>
+    <div class="skills">
+      <div class="group">
+        <div class="label"><span class="es">Lenguajes y frameworks</span><span class="en">Languages &amp; frameworks</span></div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">Python</span><span class="tag">Django</span></div>
+      </div>
+      <div class="group">
+        <div class="label"><span class="es">Backend y APIs</span><span class="en">Backend &amp; APIs</span></div>
+        <div class="tags"><span class="tag">REST APIs</span><span class="tag"><span class="es">Integraciones entre sistemas</span><span class="en">System integrations</span></span><span class="tag"><span class="es">Arquitecturas orientadas a eventos</span><span class="en">Event-driven architectures</span></span><span class="tag"><span class="es">Procesamiento asíncrono</span><span class="en">Asynchronous processing</span></span><span class="tag">Sequelize</span></div>
+      </div>
+      <div class="group">
+        <div class="label">Cloud &amp; DevOps</div>
+        <div class="tags"><span class="tag">AWS</span><span class="tag">AWS CDK</span><span class="tag">Infrastructure as Code</span><span class="tag">Serverless</span><span class="tag">Docker</span><span class="tag">CloudWatch</span></div>
+      </div>
+      <div class="group">
+        <div class="label"><span class="es">IA en el desarrollo</span><span class="en">AI in development</span></div>
+        <div class="tags"><span class="tag">Spec-Driven Development</span><span class="tag">Claude Code</span><span class="tag"><span class="es">Agentes de IA</span><span class="en">AI agents</span></span><span class="tag"><span class="es">Ingeniería de contexto y prompts</span><span class="en">Context &amp; prompt engineering</span></span></div>
+      </div>
+      <div class="group">
+        <div class="label"><span class="es">Seguridad</span><span class="en">Security</span></div>
+        <div class="tags"><span class="tag"><span class="es">Autenticación y sesiones</span><span class="en">Authentication &amp; sessions</span></span><span class="tag"><span class="es">Cifrado de datos</span><span class="en">Data encryption</span></span><span class="tag"><span class="es">Gestión de credenciales</span><span class="en">Credential management</span></span></div>
+      </div>
+      <div class="group">
+        <div class="label"><span class="es">Bases de datos</span><span class="en">Databases</span></div>
+        <div class="tags"><span class="tag">SQL</span><span class="tag">DynamoDB</span><span class="tag">MongoDB</span></div>
+      </div>
+      <div class="group">
+        <div class="label"><span class="es">Herramientas</span><span class="en">Tools</span></div>
+        <div class="tags"><span class="tag">Git</span><span class="tag">DBeaver</span><span class="tag">Automation 360</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formacion">
+    <h2><span class="es">Certificaciones y formación</span><span class="en">Certifications &amp; education</span></h2>
+    <div class="two">
+      <ul class="plain">
+        <li>AWS Certified Developer – Associate</li>
+        <li>AWS Certified Cloud Practitioner</li>
+        <li>Technical Support Specialist (Automation 360)</li>
+        <li>EF SET Certificate <span class="es">(inglés)</span><span class="en">(English)</span></li>
+      </ul>
+      <ul class="plain">
+        <li><span class="es">Gerencia de Proyectos</span><span class="en">Project Management</span><small>Corporación Universitaria Minuto de Dios · 2019</small></li>
+        <li><span class="es">Administración de Empresas</span><span class="en">Business Administration</span><small>Universidad Cooperativa de Colombia · 2011 – 2015</small></li>
+        <li><span class="es">Español nativo · Inglés profesional</span><span class="en">Native Spanish · Professional English</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2><span class="es">Contacto</span><span class="en">Contact</span></h2>
+    <p class="es">Estoy en Meta, Colombia, y trabajo de forma remota. Escríbeme a <a href="mailto:luismiguelrussot@hotmail.com">luismiguelrussot@hotmail.com</a> o por <a href="https://www.linkedin.com/in/luis-miguel-russo-t-09294385" target="_blank" rel="noopener">LinkedIn</a>.</p>
+    <p class="en">I am based in Meta, Colombia, and work remotely. Reach me at <a href="mailto:luismiguelrussot@hotmail.com">luismiguelrussot@hotmail.com</a> or on <a href="https://www.linkedin.com/in/luis-miguel-russo-t-09294385" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Luis Miguel Russo Tinjaca</div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('lang');
+    function set(lang) {
+      root.lang = lang;
+      btn.textContent = lang === 'es' ? 'EN' : 'ES';
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    set(saved || ((navigator.language || 'es').slice(0, 2) === 'es' ? 'es' : 'en'));
+    btn.addEventListener('click', function () { set(root.lang === 'es' ? 'en' : 'es'); });
+  })();
+</script>
+</body>
+</html>
